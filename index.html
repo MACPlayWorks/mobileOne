@@ -3,15 +3,38 @@
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>MobileOne</title> 
-    </head> 
+    </head>
     <body>
+		<script type="template/underscore" id="loginTemplate">
+			<% console.log("view", collector.get("collectorNumber")) %>
+			Blah blah blah <%= collector.get("collectorNumber") %>
+		</script>
+
+
 		<article>
 			<section>
 				<h1>Hello MobileOne</h1>
-				<p>Salutations</p>
+				<p>Salutations rawr</p>
+				
 			</section>
+			
+			<section id="login">login</section>
 		</article>
 		
+		<script src="javascripts/lib/jquery-2.0.3.min.js"></script>
+		<script src="javascripts/lib/underscore-1.5.1.min.js"></script>
+		<script src="javascripts/lib/backbone-1.0.0.min.js"></script>
+		
+		<!-- Models -->
+		<script src="javascripts/models/collector.model.js"></script>
+		
+		<!-- Presenters (Views controlers) -->
+		<script src="javascripts/presenters/login.presenter.js"></script>
+
+		<!-- Application -->
 		<script src="javascripts/application.js"></script>
+		
+		<!-- Entry Point -->
+		<script src="javascripts/main.js"></script>
     </body> 
 </html>

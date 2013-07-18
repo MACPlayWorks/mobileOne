@@ -1,4 +1,15 @@
-(function(namespace) {
-	// Initialization code here
-	console.log('mobile app initialized');
-})(window);
+// Global Event Bus
+var Application = function(options) {
+	this.options = options || {};
+	this.initialize.apply(this, arguments);
+};
+_.extend(Application.prototype, Backbone.Events, {
+	
+	presenters: {},
+	
+	initialize: function() {
+		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
+	},
+	
+});	
+	
