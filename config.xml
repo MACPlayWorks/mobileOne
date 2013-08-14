@@ -8,5 +8,7 @@
     <description>Air Miles application description</description>
     <icon src="images/icon.png"/>
     <content src="index.html"/> 
+	
+	 <access subdomains="true" uri="*" />
 
 </widget>
