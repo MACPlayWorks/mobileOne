@@ -5,36 +5,50 @@
         <title>MobileOne</title> 
 		
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />
 		
 		<link rel="stylesheet" type="text/css" href="stylesheets/typography.css" />
-		<link rel="stylesheet" type="text/css" href="stylesheets/application.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/structure.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/login.css" />
     </head>
     <body>
 		<script type="template/underscore" id="menuTemplate">
-			TODO
+			<h1>Menu</h1>
 		</script>
-
+		
+		<script type="template/underscore" id="navigationTemplate">
+			<button type="button" class="btn">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<h1>Navigation Bar</h1>
+		</script>
 
 		<script type="template/underscore" id="loginTemplate">
-			<input type="text" class="input-xlarge" placeholder="Collector Number"></input>
+			<article>
+				<header>
+					<img src="images/icon.png" />
+				</header>
+				<section class="form">
+					<input type="text" class="form-control" placeholder="Collector Number"></input>
+				</section>
+			</article>
+		</script>
+		
+		<script type="template/underscore" id="homeTemplate">
+			<h1>Home</h1>
 		</script>
 
-		<article id="application" page="login">
-			<nav id="navigation">
-				<button type="button" class="btn" onclick="app.menu('toggle')">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<h1>Navigation Bar</h1>
-			</nav>
+		<div id="container">
 			<aside id="menu"></aside>
-			<section>
-				<article id="login"></article>
-			</section>
-		</article>
+			
+			<article id="application" page="login">
+				<nav id="navigation" class="navbar"></nav>
+				
+				<section id="login"></section>
+				<section id="home"></section>
+			</article>
+		</div>
 		
 		<script src="javascripts/lib/jquery-2.0.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -45,6 +59,8 @@
 		<script src="javascripts/models/collector.model.js"></script>
 		
 		<!-- Presenters (Views controlers) -->
+		<script src="javascripts/presenters/menu.presenter.js"></script>
+		<script src="javascripts/presenters/navigation.presenter.js"></script>
 		<script src="javascripts/presenters/login.presenter.js"></script>
 
 		<!-- Application -->

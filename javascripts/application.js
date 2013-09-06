@@ -9,10 +9,11 @@ _.extend(Application.prototype, Backbone.Events, {
 	presenters: {},
 	
 	initialize: function() {
+		// Initialization code here
+		this.presenters.menu = new MenuPresenter();
+		this.presenters.menu = new NavigationPresenter();
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
 		
-		// Initialization code here
-
 	},
 	
 	menu: function(options) {
