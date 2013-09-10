@@ -65,10 +65,14 @@
 		</script>
 		
 		<script type="template/underscore" id="homeTemplate">
+			<% console.log(user) %>
 			<article>
-				<header>
-					<h1>Home</h1>
-				</header>
+				<section class="jumbotron">
+					<h1>Hello <%= user.fname %></h1>
+					<p>You have <%= user.balance %> Dream Reward Miles and <%= user.cashBalance %> Cash Reward Miles</p>
+					<p><a class="btn btn-primary btn-lg">Check In Nearby</a></p>
+					<p><a class="btn btn-primary btn-lg">Offers Nearby</a></p>
+				</section>
 			</article>
 		</script>
 
