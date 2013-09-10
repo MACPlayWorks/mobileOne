@@ -1,3 +1,3 @@
 var CollectorModel = Backbone.Model.extend({
-	url: 'https://services.airmiles.ca/lig/amrp/collector.json'
+	url: 'https://np-services.airmiles.ca/lig/amrp/collector.json'
 });
