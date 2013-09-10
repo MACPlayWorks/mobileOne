@@ -11,9 +11,8 @@ _.extend(Application.prototype, Backbone.Events, {
 	initialize: function() {
 		// Initialization code here
 		this.presenters.menu = new MenuPresenter();
-		this.presenters.menu = new NavigationPresenter();
+		this.presenters.nav = new NavigationPresenter();
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
-		
 	},
 	
 	menu: function(options) {
@@ -23,6 +22,12 @@ _.extend(Application.prototype, Backbone.Events, {
 			$('#application').removeClass('menu');
 		} else if (options === 'toggle') {
 			$('#application').toggleClass('menu');
+		}
+	},
+	
+	changeView: function(view) {
+		if (this.presenters[view]) {
+			$('#application').attr('page', view);
 		}
 	}
 });
