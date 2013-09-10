@@ -1,4 +1,7 @@
-#login {
+section#login {
+	top: 0;
+	height: 100%;
+	
 	background: rgb(0,159,218);
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,159,218,1)), color-stop(99%,rgba(0,155,207,1)));
 	background: -moz-radial-gradient(center, ellipse cover, rgba(0,159,218,1) 0%, rgba(0,155,207,1) 99%);
