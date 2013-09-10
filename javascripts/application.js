@@ -14,9 +14,7 @@ _.extend(Application.prototype, Backbone.Events, {
 		this.presenters.navigation = new NavigationPresenter({model: this});
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
 		
-		if (blackberry) {
-			blackberry.event.addEventListener('swipedown', this.navigation);
-		}
+		blackberry.event.addEventListener('swipedown', this.navigation);
 	},
 	
 	navigation: function(options) {

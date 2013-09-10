@@ -22,14 +22,15 @@ var LoginPresenter = Backbone.View.extend({
 	
 	onLogin: function() {
 		if (this.validate()) {
-			console.log('valid collector number');
+			console.log(blackberry);
 			var collectorModel = new CollectorModel();
 			var setHeader = function (xhr) {
                 xhr.setRequestHeader('X-LO-COLLECTOR-NUM', '50001366854');
                 xhr.setRequestHeader('X-LO-API-CLIENT-KEY', '0c921fb9-8e73-4349-bef5-e7960551b4ca');
                 xhr.setRequestHeader('Accept-Language', 'en-CA');
-                xhr.setRequestHeader('X-LO-DEVICE-ID', 'BB10');
-                 }
+                xhr.setRequestHeader('X-LO-DEVICE-ID', blackberry.identity.uuid);
+				xhr.setRequestHeader('DEVICE_TYPE', 'BB10');
+			}
 			collectorModel.fetch({
 				beforeSend: setHeader,
 				success: function(user) {
