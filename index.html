@@ -8,15 +8,24 @@
 		
 		<link rel="stylesheet" type="text/css" href="stylesheets/typography.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/structure.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/menu.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/login.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/home.css" />
     </head>
     <body>
 		<script type="template/underscore" id="menuTemplate">
-			<h1>Menu</h1>
+			<article>
+				<header>
+					<h1>Menu</h1>
+				</header>
+				<section>
+					<p>This is the menu</p>
+				</section>
+			</article>
 		</script>
 		
 		<script type="template/underscore" id="navigationTemplate">
-			<button type="button" class="btn">
+			<button type="button" class="btn menu">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -63,6 +72,7 @@
 		<script src="javascripts/presenters/menu.presenter.js"></script>
 		<script src="javascripts/presenters/navigation.presenter.js"></script>
 		<script src="javascripts/presenters/login.presenter.js"></script>
+		<script src="javascripts/presenters/home.presenter.js"></script>
 
 		<!-- Application -->
 		<script src="javascripts/application.js"></script>
