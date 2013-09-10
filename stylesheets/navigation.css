@@ -1,0 +1,24 @@
+#navigation {
+	margin-top: -20%;
+	border-radius: 0;
+	
+	transition: margin-top .5s;
+	-webkit-transition: margin-top .5s;
+}
+
+#application.navigation #navigation {
+	margin-top: 0;
+}
+
+#application.navigation > .navigationOverlay {
+	display: block;
+}
+
+#application > .navigationOverlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+}

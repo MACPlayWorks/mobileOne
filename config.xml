@@ -9,6 +9,9 @@
     <icon src="images/icon.png"/>
     <content src="index.html"/> 
 	
-	 <access subdomains="true" uri="*" />
+	<feature id="blackberry.app" required="true" version="1.0.0.0"/>
+	<feature id="blackberry.app.event" required="true" version="1.0.0.0"/>
+	
+	<access subdomains="true" uri="*" />
 
 </widget>

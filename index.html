@@ -6,9 +6,9 @@
 		
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 		
-		<link rel="stylesheet" type="text/css" href="stylesheets/typography.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/structure.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/menu.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/navigation.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/login.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/home.css" />
     </head>
@@ -25,12 +25,43 @@
 		</script>
 		
 		<script type="template/underscore" id="navigationTemplate">
-			<button type="button" class="btn menu">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<h1>Navigation Bar</h1>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".menu-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">AIR MILES</a>
+			</div>
+			
+			<div class="navbar-collapse menu-collapse in" style="height: auto;">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Rewards</a></li>
+					<li><a href="#">Offers</a></li>
+					<li><a href="#">Sponsors</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Check In <b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Nearby</a></li>
+							<li><a href="#">Categories</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Card</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Transaction History</a></li>
+							<li><a href="#">Inbox</a></li>
+							<li><a href="#">About</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</script>
 
 		<script type="template/underscore" id="loginTemplate">
@@ -53,10 +84,12 @@
 			<aside id="menu"></aside>
 
 			<article id="application" page="login">
-				<nav id="navigation" class="navbar"></nav>
+				<nav id="navigation" class="navbar navbar-default" role="navigation"></nav>
 				
 				<section id="login"></section>
 				<section id="home"></section>
+				
+				<div class="navigationOverlay"></div>
 			</article>
 		</div>
 		

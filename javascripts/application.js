@@ -13,16 +13,24 @@ _.extend(Application.prototype, Backbone.Events, {
 		this.presenters.menu = new MenuPresenter();
 		this.presenters.nav = new NavigationPresenter();
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
+		
+		if (blackberry) {
+			blackberry.event.addEventListener('swipedown', this.navigation);
+		}
 	},
 	
-	menu: function(options) {
+	navigation: function(options) {
 		if (options === 'show') {
-			$('#application').addClass('menu');
+			$('#application').addClass('navigation');
 		} else if (options === 'hide'){
-			$('#application').removeClass('menu');
-		} else if (options === 'toggle') {
-			$('#application').toggleClass('menu');
+			$('#application').removeClass('navigation');
+		} else {
+			$('#application').toggleClass('navigation');
 		}
+	},
+	
+	closeNavigation: function() {
+		this.navigation('hide');
 	},
 	
 	changeView: function(view) {

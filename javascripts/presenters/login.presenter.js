@@ -32,8 +32,9 @@ var LoginPresenter = Backbone.View.extend({
                  }
 			collectorModel.fetch({
 				beforeSend: setHeader,
-				success: function() {
-					console.log('logged In! YAY', arguments);
+				success: function(user) {
+					app.presenters.home = new HomePresenter({model: user});
+					app.changeView('home');
 				},
 				error: function() {
 					console.log('error', arguments);
