@@ -10,8 +10,7 @@ _.extend(Application.prototype, Backbone.Events, {
 	
 	initialize: function() {
 		// Initialization code here
-		this.presenters.menu = new MenuPresenter();
-		this.presenters.nav = new NavigationPresenter();
+		this.presenters.navigation = new NavigationPresenter();
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
 		
 		if (blackberry) {

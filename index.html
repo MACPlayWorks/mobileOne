@@ -7,23 +7,11 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 		
 		<link rel="stylesheet" type="text/css" href="stylesheets/structure.css" />
-		<link rel="stylesheet" type="text/css" href="stylesheets/menu.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/navigation.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/login.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/home.css" />
     </head>
     <body>
-		<script type="template/underscore" id="menuTemplate">
-			<article>
-				<header>
-					<h1>Menu</h1>
-				</header>
-				<section>
-					<p>This is the menu</p>
-				</section>
-			</article>
-		</script>
-		
 		<script type="template/underscore" id="navigationTemplate">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".menu-collapse">
@@ -77,12 +65,14 @@
 		</script>
 		
 		<script type="template/underscore" id="homeTemplate">
-			<h1>Home</h1>
+			<article>
+				<header>
+					<h1>Home</h1>
+				</header>
+			</article>
 		</script>
 
 		<div id="container">
-			<aside id="menu"></aside>
-
 			<article id="application" page="login">
 				<nav id="navigation" class="navbar navbar-default" role="navigation"></nav>
 				
@@ -102,7 +92,6 @@
 		<script src="javascripts/models/collector.model.js"></script>
 		
 		<!-- Presenters (Views controlers) -->
-		<script src="javascripts/presenters/menu.presenter.js"></script>
 		<script src="javascripts/presenters/navigation.presenter.js"></script>
 		<script src="javascripts/presenters/login.presenter.js"></script>
 		<script src="javascripts/presenters/home.presenter.js"></script>
