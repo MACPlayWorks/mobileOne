@@ -24,12 +24,14 @@ var LoginPresenter = Backbone.View.extend({
 		if (this.validate()) {
 			console.log('valid collector number');
 			var collectorModel = new CollectorModel();
-			// Set the api key and collector number
-			$.ajaxSetup({
-				'X-LO-COLLECTOR-NUM': '84097232197',
-				'X-LO-API-CLIENT-KEY': '605ef001-3fe1-4c20-a2b5-ad498e15a315'
-			});
+			var setHeader = function (xhr) {
+                xhr.setRequestHeader('X-LO-COLLECTOR-NUM', '50001366854');
+                xhr.setRequestHeader('X-LO-API-CLIENT-KEY', '0c921fb9-8e73-4349-bef5-e7960551b4ca');
+                xhr.setRequestHeader('Accept-Language', 'en-CA');
+                xhr.setRequestHeader('X-LO-DEVICE-ID', 'BB10');
+                 }
 			collectorModel.fetch({
+				beforeSend: setHeader,
 				success: function() {
 					console.log('logged In! YAY', arguments);
 				},
