@@ -15,7 +15,7 @@ var NavigationPresenter = Backbone.View.extend({
 	},
 	
 	render: function() {
-		this.$el.html(this.template());
+		this.$el.html(this.template({view: this.model.currentView}));
 		
 		return this;
 	},

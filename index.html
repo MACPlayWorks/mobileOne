@@ -25,7 +25,7 @@
 			
 			<div class="navbar-collapse menu-collapse in" style="height: auto;">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="<%= (view === 'home' ? 'active' : '') %>"><a href="#">Home</a></li>
 					<li><a href="#">Rewards</a></li>
 					<li><a href="#">Offers</a></li>
 					<li><a href="#">Sponsors</a></li>
@@ -65,7 +65,6 @@
 		</script>
 		
 		<script type="template/underscore" id="homeTemplate">
-			<% console.log(user) %>
 			<article>
 				<section class="jumbotron">
 					<h1>Hello <%= user.fname %></h1>

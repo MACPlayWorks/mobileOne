@@ -10,7 +10,8 @@ _.extend(Application.prototype, Backbone.Events, {
 	
 	initialize: function() {
 		// Initialization code here
-		this.presenters.navigation = new NavigationPresenter();
+		this.currentView = 'login';
+		this.presenters.navigation = new NavigationPresenter({model: this});
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
 		
 		if (blackberry) {
@@ -35,6 +36,8 @@ _.extend(Application.prototype, Backbone.Events, {
 	changeView: function(view) {
 		if (this.presenters[view]) {
 			$('#application').attr('page', view);
+			this.currentView = view;
+			this.presenters.navigation.render();	// Update navigation view
 		}
 	}
 });
