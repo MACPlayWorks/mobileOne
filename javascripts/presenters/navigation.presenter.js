@@ -8,16 +8,15 @@ var NavigationPresenter = Backbone.View.extend({
 	initialize: function() {	// Expect a Collector model
 		this.template = _.template($('#navigationTemplate').html());
 		this.render();
+		
+		$('#application > .navigationOverlay').click(function() {
+			app.navigation('hide');
+		})
 	},
 	
 	render: function() {
-		this.$el.html(this.template());
+		this.$el.html(this.template({view: this.model.currentView}));
 		
 		return this;
 	},
-	
-	toggleMenu: function() {
-		$('#container').toggleClass('menu');
-	}
-
 });

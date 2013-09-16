@@ -9,7 +9,7 @@ var HomePresenter = Backbone.View.extend({
 	},
 	
 	render: function() {
-		this.$el.html(this.template({user: this.model}));
+		this.$el.html(this.template({user: this.model.attributes }));
 		
 		return this;
 	}

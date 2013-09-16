@@ -10,24 +10,32 @@ _.extend(Application.prototype, Backbone.Events, {
 	
 	initialize: function() {
 		// Initialization code here
-		this.presenters.menu = new MenuPresenter();
-		this.presenters.nav = new NavigationPresenter();
+		this.currentView = 'login';
+		this.presenters.navigation = new NavigationPresenter({model: this});
 		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
+		
+		blackberry.event.addEventListener('swipedown', this.navigation);
 	},
 	
-	menu: function(options) {
+	navigation: function(options) {
 		if (options === 'show') {
-			$('#application').addClass('menu');
+			$('#application').addClass('navigation');
 		} else if (options === 'hide'){
-			$('#application').removeClass('menu');
-		} else if (options === 'toggle') {
-			$('#application').toggleClass('menu');
+			$('#application').removeClass('navigation');
+		} else {
+			$('#application').toggleClass('navigation');
 		}
+	},
+	
+	closeNavigation: function() {
+		this.navigation('hide');
 	},
 	
 	changeView: function(view) {
 		if (this.presenters[view]) {
 			$('#application').attr('page', view);
+			this.currentView = view;
+			this.presenters.navigation.render();	// Update navigation view
 		}
 	}
 });
