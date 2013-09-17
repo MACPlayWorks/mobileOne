@@ -2,7 +2,7 @@ var NavigationPresenter = Backbone.View.extend({
 	el: '#navigation',
 	
 	events: {
-		'click .menu': 'toggleMenu'
+		'click .rewards': 'navigateToRewards'
 	},
 	
 	initialize: function() {	// Expect a Collector model
@@ -19,4 +19,18 @@ var NavigationPresenter = Backbone.View.extend({
 		
 		return this;
 	},
+	
+	navigateToRewards: function() {
+		var featuredRewards = new RewardCollection('cat300001');
+		featuredRewards.fetch({
+			success: function() {
+				if (!app.presenters.rewardList) {
+					app.presenters.rewardList = new RewardListPresenter({collection: featuredRewards});
+				} else {
+					app.presenters.rewardList.collection.reset(featuredRewards.models);
+				}
+				app.changeView('rewardList');
+			}
+		});
+	}
 });

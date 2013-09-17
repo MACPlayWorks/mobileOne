@@ -51,6 +51,8 @@ body {
 }
 
 #application[page=login] > #login, 
-#application[page=home] > #home {
+#application[page=home] > #home,
+#application[page=rewardList] > #rewardList,
+#application[page=reward] > #reward {
 	display: block;
 }

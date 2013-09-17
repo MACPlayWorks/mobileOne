@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="stylesheets/navigation.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/login.css" />
 		<link rel="stylesheet" type="text/css" href="stylesheets/home.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/rewards.css" />
 		
 		<!-- framework -->
         <script src="local:///chrome/webworks.js" type="text/javascript"></script>
@@ -28,8 +29,8 @@
 			
 			<div class="navbar-collapse menu-collapse in" style="height: auto;">
 				<ul class="nav navbar-nav">
-					<li class="<%= (view === 'home' ? 'active' : '') %>"><a href="#">Home</a></li>
-					<li><a href="#">Rewards</a></li>
+					<li class="<%= (view === 'home' ? 'active' : '') %>"><a href="#" class="home">Home</a></li>
+					<li><a href="#" class="rewards">Rewards</a></li>
 					<li><a href="#">Offers</a></li>
 					<li><a href="#">Sponsors</a></li>
 					<li class="dropdown">
@@ -77,6 +78,34 @@
 				</section>
 			</article>
 		</script>
+		
+		<script type="template/underscore" id="rewardListTemplate">
+			<article>
+				<header>
+					<!-- TODO: Title of category -->
+					<h1>Featured Dream Rewards</h1>
+				</header>
+				<section>
+					<ul>
+						<% rewardList.forEach(function(reward) { %>
+							<% console.log('reward', reward) %>
+							<li>
+								<h3><%= reward.get('name') %></h3>
+							</li>
+						<% }) %>
+					</ul>
+				</section>
+			</article>
+		</script>
+		
+		<script type="template/underscore" id="rewardTemplate">
+			<article>
+				<section>
+					<h1><%= reward.name %></h1>
+					<p><%= reward.amrm %> Dream Reward Points</p>
+				</section>
+			</article>
+		</script>
 
 		<div id="container">
 			<article id="application" page="login">
@@ -84,6 +113,8 @@
 				
 				<section id="login"></section>
 				<section id="home"></section>
+				<section id="rewardList"></section>
+				<section id="reward"></section>
 				
 				<div class="navigationOverlay"></div>
 			</article>
@@ -103,6 +134,8 @@
 		<script src="javascripts/presenters/navigation.presenter.js"></script>
 		<script src="javascripts/presenters/login.presenter.js"></script>
 		<script src="javascripts/presenters/home.presenter.js"></script>
+		<script src="javascripts/presenters/rewardList.presenter.js"></script>
+		<script src="javascripts/presenters/reward.presenter.js"></script>
 
 		<!-- Application -->
 		<script src="javascripts/application.js"></script>
