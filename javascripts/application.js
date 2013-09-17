@@ -12,7 +12,20 @@ _.extend(Application.prototype, Backbone.Events, {
 		// Initialization code here
 		this.currentView = 'login';
 		this.presenters.navigation = new NavigationPresenter({model: this});
-		this.presenters.login = new LoginPresenter({model: new CollectorModel()});
+		this.presenters.login = new LoginPresenter();
+		
+		var setHeader = function (xhr) {
+			if (app.collectorNumber) {
+				xhr.setRequestHeader('X-LO-COLLECTOR-NUM', app.collectorNumber);
+			}
+			xhr.setRequestHeader('X-LO-API-CLIENT-KEY', '0c921fb9-8e73-4349-bef5-e7960551b4ca');
+			xhr.setRequestHeader('Accept-Language', 'en-CA');
+			xhr.setRequestHeader('X-LO-DEVICE-ID', blackberry.identity.uuid);
+			xhr.setRequestHeader('DEVICE_TYPE', 'BB10');
+		};
+		$.ajaxSetup({
+			beforeSend: setHeader
+		});
 		
 		blackberry.event.addEventListener('swipedown', this.navigation);
 	},
@@ -37,6 +50,22 @@ _.extend(Application.prototype, Backbone.Events, {
 			this.currentView = view;
 			this.presenters.navigation.render();	// Update navigation view
 		}
+	},
+	
+	login: function(collectorNumber) {
+		app.collectorNumber = collectorNumber;
+
+		var collectorModel = new CollectorModel();
+		collectorModel.fetch({
+			success: function(collector) {
+				app.presenters.home = new HomePresenter({model: collector});
+				app.changeView('home');
+				app.collector = collector
+			},
+			error: function() {
+				console.log('error', arguments);
+			}
+		});
 	}
 });
 	
