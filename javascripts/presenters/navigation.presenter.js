@@ -11,7 +11,7 @@ var NavigationPresenter = Backbone.View.extend({
 		
 		$('#application > .navigationOverlay').click(function() {
 			app.navigation('hide');
-		})
+		});
 	},
 	
 	render: function() {
@@ -24,12 +24,17 @@ var NavigationPresenter = Backbone.View.extend({
 		var featuredRewards = new RewardCollection('cat300001');
 		featuredRewards.fetch({
 			success: function() {
-				if (!app.presenters.rewardList) {
-					app.presenters.rewardList = new RewardListPresenter({collection: featuredRewards});
+				if (!app.presenters.rewardCategory) {
+					app.presenters.rewardCategory = new RewardCategoryPresenter({collection: featuredRewards});
 				} else {
-					app.presenters.rewardList.collection.reset(featuredRewards.models);
+					app.presenters.rewardCategory.collection.reset(featuredRewards.models);
 				}
-				app.changeView('rewardList');
+				if (!app.presenters.rewardCategory.categories.id) {	// Failed to retrieve categories
+					// Retry
+					app.presenters.rewardCategory.updateCategories();
+				}
+				app.changeView('rewardCategory');
+				app.navigation('hide');
 			}
 		});
 	}

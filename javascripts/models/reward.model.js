@@ -15,12 +15,11 @@ var RewardCategoryModel = Backbone.Model.extend({
 
 var RewardCollection = Backbone.Collection.extend({
 	url: function() {
-		console.log('url', this);
 		return 'https://np-services.airmiles.ca/lig/amrp/rewardListing.json?selectedCategoryId=' + this.categoryId
 	},
 	model: RewardModel,
 
-	initialize: function(categoryId) {
+	initialize: function(data, categoryId) {
 		this.categoryId = categoryId;
 	},
 

@@ -79,18 +79,44 @@
 			</article>
 		</script>
 		
-		<script type="template/underscore" id="rewardListTemplate">
+		<script type="template/underscore" id="rewardCategoryTemplate">
 			<article>
 				<header>
-					<!-- TODO: Title of category -->
 					<h1>Featured Dream Rewards</h1>
 				</header>
 				<section>
 					<ul>
-						<% rewardList.forEach(function(reward) { %>
-							<% console.log('reward', reward) %>
+						<% rewards.forEach(function(reward) { %>
 							<li>
-								<h3><%= reward.get('name') %></h3>
+								<h3><%= reward.get('name') %> (<%= reward.get('amrm') %>)</h3>
+							</li>
+						<% }) %>
+					</ul>
+				</section>
+				<section>
+					<h1>Categories</h1>
+					<ul>
+						<% (categories.get('childCat') || []).forEach(function(category) { %>
+							<li>
+								<h3><a href="#" categoryId="<%= category.id %>" class="category"><%= category.name %></a></h3>
+							</li>
+						<% }) %>
+					</ul>
+				</section>
+			</article>
+		</script>
+		
+		<script type="template/underscore" id="rewardListTemplate">
+			<article>
+				<header>
+					<h1><%= categoryName %></h1>
+				</header>
+				<section>
+					<ul>
+						<% console.log('reward list view', rewards) %>
+						<% rewards.forEach(function(reward) { %>
+							<li>
+								<h3><%= reward.get('name') %> (<%= reward.get('amrm') ? reward.get('amrm') : reward.get('overridden-amrm')[0].curAmrm %>)</h3>
 							</li>
 						<% }) %>
 					</ul>
@@ -113,6 +139,7 @@
 				
 				<section id="login"></section>
 				<section id="home"></section>
+				<section id="rewardCategory"></section>
 				<section id="rewardList"></section>
 				<section id="reward"></section>
 				
@@ -134,6 +161,7 @@
 		<script src="javascripts/presenters/navigation.presenter.js"></script>
 		<script src="javascripts/presenters/login.presenter.js"></script>
 		<script src="javascripts/presenters/home.presenter.js"></script>
+		<script src="javascripts/presenters/rewardCategory.presenter.js"></script>
 		<script src="javascripts/presenters/rewardList.presenter.js"></script>
 		<script src="javascripts/presenters/reward.presenter.js"></script>
 
