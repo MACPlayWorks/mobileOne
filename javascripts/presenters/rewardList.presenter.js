@@ -1,6 +1,10 @@
 var RewardListPresenter = Backbone.View.extend({
 	el: '#rewardList',
 	
+	events: {
+		'click a.reward': 'selectReward'
+	},
+	
 	initialize: function(attr) {	// Expect a Collector model
 		attr = attr || {};
 		this.categoryName = attr.categoryName || 'Featured Dream Rewards';
@@ -27,6 +31,18 @@ var RewardListPresenter = Backbone.View.extend({
 		this.$el.html(this.template({ categoryName: this.categoryName, rewards: this.rewards.slice(0, 10) }));
 		
 		return this;
+	},
+	
+	selectReward: function(event) {
+		event.preventDefault();
+		var rewardTag = $(event.target);
+		var rewardId = rewardTag.attr('rewardId');
+		
+		if (app.presenters.reward) {
+			app.presenters.reward.remove();	// Detach old presenter
+		}
+		app.presenters.reward = new RewardPresenter({rewardId: rewardId});
+		app.changeView('reward');
 	}
 
 });

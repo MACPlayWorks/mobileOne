@@ -2,20 +2,27 @@ var RewardCategoryPresenter = Backbone.View.extend({
 	el: '#rewardCategory',
 	
 	events: {
-		'click .category': 'selectCategory'
+		'click a.reward': 'selectReward'
 	},
 	
 	initialize: function() {	// Expect a Collector model
+		this.featuredRewards = new RewardCollection(null, 'cat300001');
 		this.categories = new RewardCategoryModel();
 	
 		this.template = _.template($('#rewardCategoryTemplate').html());
-		this.listenTo(this.collection, 'change', this.render);
-		this.listenTo(this.collection, 'reset', this.render);
+		this.listenTo(this.featuredRewards, 'change', this.render);
+		this.listenTo(this.featuredRewards, 'reset', this.render);
 		this.listenTo(this.categories, 'change', this.render);
 		this.listenTo(this.categories, 'reset', this.render);
 		
+		this.updateRewards();
 		this.updateCategories();
+		
 		this.render();
+	},
+	
+	updateRewards: function() {
+		this.featuredRewards.fetch({reset: true});
 	},
 	
 	updateCategories: function() {
@@ -23,23 +30,32 @@ var RewardCategoryPresenter = Backbone.View.extend({
 	},
 	
 	render: function() {
+		var self = this;
+		
+		if (this.categoryList) {
+			this.categoryList.remove();
+		}
+		
+		this.categoryList = new RewardCategoryItemPresenter({model: this.categories});
+		
 		// TODO scroll reward collection
-		this.$el.html(this.template({ rewards: this.collection.slice(0, 10), categories: this.categories }));
+		this.$el.html(this.template({ rewards: this.featuredRewards.slice(0, 10), categories: this.categories }));
+
+		self.$('.categoryList:not([categoryId])').append(this.categoryList.el);
 		
 		return this;
 	},
 	
-	selectCategory: function(event) {
+	selectReward: function(event) {
 		event.preventDefault();
-		var categoryTag = $(event.target);
-		var categoryId = categoryTag.attr('categoryId');
-		var categoryName = categoryTag.html();
-
-		if (app.presenters.rewardList) {
-			app.presenters.rewardCategory.unbind();	// Detach old presenter
+		var rewardTag = $(event.target);
+		var rewardId = rewardTag.attr('rewardId');
+		
+		if (app.presenters.reward) {
+			app.presenters.reward.unbind();	// Detach old presenter
 		}
-		app.presenters.rewardList = new RewardListPresenter({categoryId: categoryId, categoryName: categoryName });
-		app.changeView('rewardList');
+		app.presenters.reward = new RewardPresenter({rewardId: rewardId});
+		app.changeView('reward');
 	}
 
 });

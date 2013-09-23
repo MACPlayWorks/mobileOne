@@ -85,25 +85,39 @@
 					<h1>Featured Dream Rewards</h1>
 				</header>
 				<section>
-					<ul>
-						<% rewards.forEach(function(reward) { %>
+					<ul class="rewardList">
+						<% if (rewards.length === 0) { %>
 							<li>
-								<h3><%= reward.get('name') %> (<%= reward.get('amrm') %>)</h3>
+								<p>Loading rewards, please wait...</p>
 							</li>
-						<% }) %>
+						<% } else { %>
+							<% rewards.forEach(function(reward) { %>
+								<li>
+									<h3><a href="#" rewardId="<%= reward.get('productId') %>" class="reward"><%= reward.get('name') %></a> (<%= reward.get('amrm') %>)</h3>
+								</li>
+							<% }) %>
+						<% } %>
 					</ul>
 				</section>
 				<section>
-					<h1>Categories</h1>
-					<ul>
-						<% (categories.get('childCat') || []).forEach(function(category) { %>
+					<ul class="categoryList list-unstyled">
+						<% if ((categories.get('childCat') || []).length === 0) { %>
 							<li>
-								<h3><a href="#" categoryId="<%= category.id %>" class="category"><%= category.name %></a></h3>
+								<p>Loading categories, please wait...</p>
 							</li>
-						<% }) %>
+						<% } %>
 					</ul>
 				</section>
 			</article>
+		</script>
+		
+		<script type="template/underscore" id="rewardCategoryItemTemplate">
+			<% if ((category.get('childCat') || []).length === 0) { %>
+				<h3><a href="#" categoryId="<%= category.id %>" class="category"><%= category.get('name') %></a></h3>
+			<% } else { %>
+				<h3><%= category.get('name') %></h3>
+				<ul categoryId="<%= category.id %>" class="categoryList"></ul>
+			<% } %>
 		</script>
 		
 		<script type="template/underscore" id="rewardListTemplate">
@@ -113,12 +127,17 @@
 				</header>
 				<section>
 					<ul>
-						<% console.log('reward list view', rewards) %>
-						<% rewards.forEach(function(reward) { %>
+						<% if (rewards.length === 0) { %>
 							<li>
-								<h3><%= reward.get('name') %> (<%= reward.get('amrm') ? reward.get('amrm') : reward.get('overridden-amrm')[0].curAmrm %>)</h3>
+								<p>Loading rewards. Please wait...</p>
 							</li>
-						<% }) %>
+						<% } else { %>
+							<% rewards.forEach(function(reward) { %>
+								<li>
+									<h3><a href="#" rewardId="<%= reward.get('productId') %>" class="reward"><%= reward.get('name') %></a> (<%= reward.get('amrm') ? reward.get('amrm') : reward.get('overridden-amrm')[0].curAmrm %>)</h3>
+								</li>
+							<% }) %>
+						<% } %>
 					</ul>
 				</section>
 			</article>
@@ -127,8 +146,12 @@
 		<script type="template/underscore" id="rewardTemplate">
 			<article>
 				<section>
+					<% if (!reward.name) { %>
+						<p>Loading reward. Please wait...</p>
+					<% } else { %>
 					<h1><%= reward.name %></h1>
 					<p><%= reward.amrm %> Dream Reward Points</p>
+					<% } %>
 				</section>
 			</article>
 		</script>
@@ -152,6 +175,9 @@
 		<script src="javascripts/lib/underscore-1.5.1.min.js"></script>
 		<script src="javascripts/lib/backbone-1.0.0.min.js"></script>
 		
+		<!-- Cache -->
+		<script src="javascripts/cache.js"></script>
+		
 		<!-- Models -->
 		<script src="javascripts/models/message.model.js"></script>
 		<script src="javascripts/models/collector.model.js"></script>
@@ -162,6 +188,7 @@
 		<script src="javascripts/presenters/login.presenter.js"></script>
 		<script src="javascripts/presenters/home.presenter.js"></script>
 		<script src="javascripts/presenters/rewardCategory.presenter.js"></script>
+		<script src="javascripts/presenters/rewardCategoryItem.presenter.js"></script>
 		<script src="javascripts/presenters/rewardList.presenter.js"></script>
 		<script src="javascripts/presenters/reward.presenter.js"></script>
 

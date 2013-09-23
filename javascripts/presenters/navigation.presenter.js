@@ -2,6 +2,7 @@ var NavigationPresenter = Backbone.View.extend({
 	el: '#navigation',
 	
 	events: {
+		'click .home': 'navigateToHome',
 		'click .rewards': 'navigateToRewards'
 	},
 	
@@ -20,22 +21,23 @@ var NavigationPresenter = Backbone.View.extend({
 		return this;
 	},
 	
+	navigateToHome: function() {
+		if (app.collector) {
+			app.collector.fetch();
+			app.changeView('home');
+		} else {
+			app.changeView('login');
+		}
+	},
+	
 	navigateToRewards: function() {
-		var featuredRewards = new RewardCollection('cat300001');
-		featuredRewards.fetch({
-			success: function() {
-				if (!app.presenters.rewardCategory) {
-					app.presenters.rewardCategory = new RewardCategoryPresenter({collection: featuredRewards});
-				} else {
-					app.presenters.rewardCategory.collection.reset(featuredRewards.models);
-				}
-				if (!app.presenters.rewardCategory.categories.id) {	// Failed to retrieve categories
-					// Retry
-					app.presenters.rewardCategory.updateCategories();
-				}
-				app.changeView('rewardCategory');
-				app.navigation('hide');
-			}
-		});
+		if (!app.presenters.rewardCategory) {
+			app.presenters.rewardCategory = new RewardCategoryPresenter();
+		} else {
+			app.presenters.rewardCategory.updateRewards();
+			app.presenters.rewardCategory.updateCategories();
+		}
+		app.changeView('rewardCategory');
+		app.navigation('hide');
 	}
 });
