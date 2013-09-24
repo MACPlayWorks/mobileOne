@@ -39,7 +39,7 @@ var RewardListPresenter = Backbone.View.extend({
 		var rewardId = rewardTag.attr('rewardId');
 		
 		if (app.presenters.reward) {
-			app.presenters.reward.remove();	// Detach old presenter
+			app.presenters.reward.unbind();	// Detach old presenter
 		}
 		app.presenters.reward = new RewardPresenter({rewardId: rewardId});
 		app.changeView('reward');
