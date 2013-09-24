@@ -2,7 +2,8 @@ var NavigationPresenter = Backbone.View.extend({
 	el: '#navigation',
 	
 	events: {
-		'click .menu': 'toggleMenu'
+		'click .home': 'navigateToHome',
+		'click .rewards': 'navigateToRewards'
 	},
 	
 	initialize: function() {	// Expect a Collector model
@@ -11,7 +12,7 @@ var NavigationPresenter = Backbone.View.extend({
 		
 		$('#application > .navigationOverlay').click(function() {
 			app.navigation('hide');
-		})
+		});
 	},
 	
 	render: function() {
@@ -19,4 +20,24 @@ var NavigationPresenter = Backbone.View.extend({
 		
 		return this;
 	},
+	
+	navigateToHome: function() {
+		if (app.collector) {
+			app.collector.fetch();
+			app.changeView('home');
+		} else {
+			app.changeView('login');
+		}
+	},
+	
+	navigateToRewards: function() {
+		if (!app.presenters.rewardCategory) {
+			app.presenters.rewardCategory = new RewardCategoryPresenter();
+		} else {
+			app.presenters.rewardCategory.updateRewards();
+			app.presenters.rewardCategory.updateCategories();
+		}
+		app.changeView('rewardCategory');
+		app.navigation('hide');
+	}
 });
