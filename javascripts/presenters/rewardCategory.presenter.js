@@ -22,11 +22,27 @@ var RewardCategoryPresenter = Backbone.View.extend({
 	},
 	
 	updateRewards: function() {
-		this.featuredRewards.fetch({reset: true});
+		this.featuredRewards.fetch({
+			reset: true,
+			success: function() {
+				console.log('reward success', arguments);
+			},
+			error: function() {
+				console.log('reward error', arguments);
+			}
+		});
 	},
 	
 	updateCategories: function() {
-		this.categories.fetch({reset: true});
+		this.categories.fetch({
+			reset: true,
+			success: function() {
+				console.log('category success', arguments);
+			},
+			error: function() {
+				console.log('category error', arguments);
+			}
+		});
 	},
 	
 	render: function() {
