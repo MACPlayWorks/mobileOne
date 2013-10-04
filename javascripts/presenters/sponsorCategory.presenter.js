@@ -4,7 +4,7 @@ var SponsorCategoryPresenter = Backbone.View.extend ({
 	events: {
 		'click a.sponsor': 'selectSponsor',
 		'click a.sponsorToAll': 'changeToSponsorAll',
-		'click a.sponsorToCategory': 'changeToSponsorCate'
+		'click a.sponsorToCategory': 'changeToSponsorCategory'
 	},
 	
 	initialize: function(){
@@ -15,13 +15,7 @@ var SponsorCategoryPresenter = Backbone.View.extend ({
 		this.listenTo(this.sponsors, 'change', this.render);
 		this.listenTo(this.sponsors, 'reset', this.render);
 
-		
-		this.sponsors.fetch({
-			reset: true,
-			success: function() {
-				console.log('sponsors', arguments)
-			}
-		});
+	
 		
 		this.updateCategories();
 		
@@ -35,15 +29,15 @@ var SponsorCategoryPresenter = Backbone.View.extend ({
 				console.log('sponsor success', arguments);
 			},
 			error: function() {
-				console.log('sponsor error', arguments);
+				console.error('sponsor error', arguments);
 			}
 		});
 	},
 	
 	render: function() {
 	
-		console.log('render', this.sponsors.slice(0,24));
-		this.$el.html(this.template({ sponsors: this.sponsors.slice(0, 24) }));
+		console.log('render', this.sponsors);
+		this.$el.html(this.template({ sponsors: this.sponsors }));
 		
 		return this;
 	},
@@ -55,11 +49,11 @@ var SponsorCategoryPresenter = Backbone.View.extend ({
 		var categoryId = sponsorElement.attr('categoryId');
 		var categoryName = sponsorElement.attr('categoryName');
 		
-		if (app.presenters.sponsorCategoryList) {
-			app.presenters.sponsorCategoryList.unbind();
+		if (app.presenters.sponsorAll) {
+			app.presenters.sponsorAll.unbind();
 		}
-		app.presenters.sponsorCategoryList = new SponsorCategoryListPresenter({id: categoryId, name: categoryName});
-		app.changeView('sponsorCategoryList');
+		app.presenters.sponsorAll = new SponsorAllPresenter({categoryId: categoryId, categoryName: categoryName});
+		app.changeView('sponsorAll');
 	},
 	
 	changeToSponsorAll: function(event) {
@@ -73,7 +67,7 @@ var SponsorCategoryPresenter = Backbone.View.extend ({
 	},	
 	
 	
-	changeToSponsorCate: function(event) {
+	changeToSponsorCategory: function(event) {
 		event.preventDefault();
 		
 		if (app.presenters.sponsorCategory) {

@@ -160,32 +160,53 @@
 		
 		<script type="template/underscore" id="sponsorAllTemplate">
 			<article>
-				<header>
-					<h1 class="sponsorHeader">Sponsors</h1>
-				</header>
-				<table class="sponsorTable"><tr class="sponsorTr">
-				<td class="SponsorAll" id="selectColor"><a href="#" class="sponsorToAll">All</a></td>
-				<td class="sponsorCate"><a href="#" class="sponsorToCategory">Categories</a></td>
-				<td class="SponsorAll"><a href="#" >Nearby</a></td>
-				</tr></table>
-				<section>
-					<ul>
-						<% if (sponsors.length === 0) { %>
-							<li>
-								<p>Loading sponsors. Please wait...</p>
-							</li>
-						<% } else { %>
-							<% sponsors.forEach(function(sponsor) { %>
-								<% if (sponsor.get('name') !="") { %>
+				<% if (categoryName) { %>
+						<header>
+							<h1 class="sponsorHeader">Sponsors of <%= categoryName %></h1>
+						</header>
+						<section>
+							<ul>
+								<% if (sponsors.length === 0) { %>
 									<li>
-										<h3><image class="sponsorImage" src="<%= sponsor.get('logo-url') %>" /><a href="#" sponsorId="<%= sponsor.get('id') %>" class="sponsor"><%= sponsor.get('name') %></a></h3>
+										<p>Loading sponsors. Please wait...</p>
 									</li>
-								
+								<% } else { %>
+									<% sponsors.forEach(function(sponsor) { %>
+										<li>
+										<h3><image class="sponsorImage" src="<%= sponsor.get('logo-url') %>" /><a href="#" sponsorId="<%= sponsor.get('id') %>" class="sponsor"><%= sponsor.get('name') %></a></h3>
+										</li>
+									<% }) %>
 								<% } %>
-							<% }) %>
+							</ul>
+						</section>
+				<% } else { %>
+						<header>
+							<h1 class="sponsorHeader">Sponsors</h1>
+						</header>
+						<ul class="nav nav-pills" id="sponsorNavigation">
+							<li class="active"><a href="#" class="sponsorToAll">All</a></li>
+							<li><a href="#" class="sponsorToCategory">Categories</a></li>
+							<li><a href="#" >Nearby</a></li>
+						</ul>
+						<section>
+						<ul>
+						<% if (sponsors.length === 0) { %>
+								<li>
+									<p>Loading sponsors. Please wait...</p>
+								</li>
+						<% } else { %>
+								<% sponsors.forEach(function(sponsor) { %>
+									<% if (sponsor.get('name') !="") { %>
+										<li>
+											<h3><image class="sponsorImage" src="<%= sponsor.get('logo-url') %>" /><a href="#" sponsorId="<%= sponsor.get('id') %>" class="sponsor"><%= sponsor.get('name') %></a></h3>
+										</li>
+								
+									<% } %>
+								<% }) %>
 						<% } %>
-					</ul>
-				</section>
+						</ul>
+						</section>
+					<% } %>
 			</article>
 		</script>
 		
@@ -195,11 +216,11 @@
 				<header>
 					<h1 class="sponsorHeader">Sponsor Categories</h1>
 				</header>
-				<table class="sponsorTable"><tr class="sponsorTr">
-				<td class="SponsorAll"><a href="#" class="sponsorToAll">All</a></td>
-				<td class="sponsorCate" id="selectColor"><a href="#" class="sponsorToCategory">Categories</a></td>
-				<td class="SponsorAll"><a href="#" >Nearby</a></td>
-				</tr></table>
+				<ul class="nav nav-pills" id="sponsorNavigation">
+					<li><a href="#" class="sponsorToAll">All</a></li>
+					<li class="active"><a href="#" class="sponsorToCategory">Categories</a></li>
+					<li><a href="#" >Nearby</a></li>
+				</ul>
 				<section>
 					<ul>
 						<% if (sponsors.length === 0) { %>
@@ -225,35 +246,14 @@
 						<p>Loading sponsor. Please wait...</p>
 					<% } else { %>
 					<h1><%= sponsor.get('name') %></h1>
-					<p><%= (sponsor.get('base-offer')).desc %></p>
+					<h5><image class="sponsorImage" src="<%= sponsor.get('logo-url') %>" />BASE OFFER: <%= (sponsor.get('base-offer')).summary %></h5>
+					<h2>Details</h2>
 					
 					<% } %>
 				</section>
 			</article>
 		</script>
-		
-		<script type="template/underscore" id="sponsorCategoryListTemplate">
-			<article>
-				<header>
-					<h1 class="sponsorHeader">Sponsors of <%= categoryName %></h1>
-				</header>
-				<section>
-					<ul>
-						<% if (sponsors.length === 0) { %>
-							<li>
-								<p>Loading sponsors. Please wait...</p>
-							</li>
-						<% } else { %>
-							<% sponsors.forEach(function(sponsor) { %>
-								<li>
-									<h3><image class="sponsorImage" src="<%= sponsor.get('logo-url') %>" /><a href="#" sponsorId="<%= sponsor.get('id') %>" class="sponsor"><%= sponsor.get('name') %></a></h3>
-								</li>
-							<% }) %>
-						<% } %>
-					</ul>
-				</section>
-			</article>
-		</script>
+
 		
 
 		<div id="container">
@@ -268,7 +268,6 @@
 				<section id="sponsorCategory"></section>
 				<section id="sponsorAll"></section>
 				<section id="sponsor"></section>
-				<section id="sponsorCategoryList"></section>
 				
 				<div class="navigationOverlay"></div>
 			</article>
@@ -300,7 +299,6 @@
 		<script src="javascripts/presenters/sponsorCategory.presenter.js"></script>
 		<script src="javascripts/presenters/sponsorAll.presenter.js"></script>
 		<script src="javascripts/presenters/sponsor.presenter.js"></script>
-		<script src="javascripts/presenters/sponsorCategoryList.presenter.js"></script>
 
 		<!-- Application -->
 		<script src="javascripts/application.js"></script>
