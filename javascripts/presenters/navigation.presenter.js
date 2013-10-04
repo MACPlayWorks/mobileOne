@@ -43,11 +43,7 @@ var NavigationPresenter = Backbone.View.extend({
 	},
 	
 	navigateToSponsors: function() {
-		if (!app.presenters.sponsorAll) {
-			app.presenters.sponsorAll = new SponsorAllPresenter();
-		} else {
-			app.presenters.sponsorAll.updateSponsors();
-		}
+		app.presenters.sponsorAll = new SponsorAllPresenter();
 		app.changeView('sponsorAll');
 		app.navigation('hide');
 	}
