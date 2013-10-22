@@ -3,7 +3,8 @@ var NavigationPresenter = Backbone.View.extend({
 	
 	events: {
 		'click .home': 'navigateToHome',
-		'click .rewards': 'navigateToRewards'
+		'click .rewards': 'navigateToRewards',
+		'click .sponsors': 'navigateToSponsors',
 	},
 	
 	initialize: function() {	// Expect a Collector model
@@ -39,5 +40,12 @@ var NavigationPresenter = Backbone.View.extend({
 		}
 		app.changeView('rewardCategory');
 		app.navigation('hide');
+	},
+	
+	navigateToSponsors: function() {
+		app.presenters.sponsorAll = new SponsorAllPresenter();
+		app.changeView('sponsorAll');
+		app.navigation('hide');
 	}
+
 });
