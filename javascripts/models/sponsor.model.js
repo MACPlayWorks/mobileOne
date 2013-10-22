@@ -12,7 +12,7 @@ var createUrlParams = function(attributes) {
 
 var SponsorModel = Backbone.Model.extend ({
 	idAttribute: 'id',
-	defaults: {verbosity: 5},
+	defaults: {verbosity: 10},
 	url: function() {
 			return 'https://np-services.airmiles.ca/lig/amrp/Sponsor/' + this.id + '.json?verbosity=' + this.attributes.verbosity;
 	}
